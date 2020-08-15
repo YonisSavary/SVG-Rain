@@ -1,2 +1,2 @@
 # SVG-Rain
-Basic SVG Color editor
+Basic color editor for SVG files

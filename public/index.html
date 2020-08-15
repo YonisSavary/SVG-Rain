@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>SVG Rain</title>
+</head>
+<body class="f-column">
+    <header>
+        <span class="header-title">
+            SVG
+            <span class="header-gradient">Rain</span>
+        </span>
+    </header>
+    <section class="f-column f-fulfill whitespace">
+        <div class="f-row b-margin f-v-centered">
+            <span style="display: none; margin: 0rem 1rem;" id="loadingSpan">Chargement...</span>
+            <button class="btn btn-green files-only" id="downloadBtn">Télécharger</button>
+            <button class="btn btn-blue" id="fileInputButton">Importer</button>
+            <input type="file" style="display: none;" accept="*.svg" id="fileInput" multiple/>
+            <button class="btn btn-gray files-only" id="selectAllBtn">Tout sélectionner</button>
+            <button class="btn btn-gray files-only" id="deselectAllBtn">Tout désélectionner</button>
+        </div>
+        <div class="f-row f-fulfill">
+            <div class="svg-container" id="svgContainer"></div>
+            <div class="svg-editor f-column whitespace files-only">
+                <u>Propriétés</u>
+                <div style="margin: 1rem 0rem"></div>
+                <span>
+                    <span id="selectionSize">0</span>
+                    éléments sélectionnés
+                </span>
+                <span>Fill :</span>
+                <div class="f-row f-v-centered">
+                    <input type="text" id="fillTextInput" targetAttribute="fill" class="mainInput">
+                    <input type="color" class="secondaryInputs" target="#fillTextInput">
+                </div>
+                <span>Stroke :</span>
+                <div class="f-row f-v-centered">
+                    <input type="text" id="strokeTextInput" targetAttribute="stroke" class="mainInput">
+                    <input type="color" class="secondaryInputs" target="#strokeTextInput">
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/SVGRain.js"></script>
+</html>

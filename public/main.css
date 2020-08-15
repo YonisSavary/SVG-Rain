@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap');
+
+:root
+{
+    --header-bg: #142739;
+    --header-fg: #ffffff;
+    --header-ff: "Oswald";
+    --main-bg: #eeeeee;
+    --main-fg: #333;
+
+    --blue-1: #8d71ff;
+    --blue-2: #9293ff;
+    --blue-3: #8cd1ff;
+
+    font-size: 24px;
+    font-family: sans-serif;
+    background-color: var(--main-bg);
+    color: var(--main-fg)
+}
+
+html, body
+{
+    width: 100%;
+    min-height: 100vh;
+    margin: 0px;
+}
+
+.f-row
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.f-column
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.f-v-centered
+{
+    align-items: center;
+}
+
+.f-full-centered
+{
+    align-items: center;
+    justify-content: center;
+}
+
+.f-v-fill
+{
+    flex-shrink: 1;
+}
+
+.f-fulfill
+{
+    flex: 1 1 0px;
+}
+
+header
+{
+    background-color: var(--header-bg);
+    color: var(--header-fg);
+    padding: 0.5rem;
+}
+
+.header-title
+{
+    font-family: var(--header-ff);
+    font-size: 1.5rem;
+}
+
+.header-gradient
+{
+    background: linear-gradient(to right, var(--blue-1), var(--blue-2), var(--blue-3));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.whitespace
+{
+    padding: 1rem;
+}
+
+.b-margin
+{
+    margin-bottom: 1rem;
+}
+
+.btn
+{
+    font-size: 1rem;
+    font-family: var(--header-ff);
+    padding: 0.1rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: white;
+    margin: 0rem 0.2rem;
+    padding-bottom: 0.1rem;
+    padding-top: 0rem;
+}
+
+.btn:active
+{
+    padding-bottom: 0rem;
+    padding-top: 0.1rem;
+}
+
+.btn-blue
+{
+    background: linear-gradient(rgb(0, 140, 255), rgb(53, 109, 238));
+}
+
+.btn-green
+{
+    background: linear-gradient(rgb(19, 230, 0),rgb(0, 218, 152));
+}
+
+.btn-gray
+{
+    background: linear-gradient(rgb(209, 209, 209),rgb(156, 156, 156));
+}
+
+.svg-container
+{
+    flex-grow: 1;
+    padding: 0.5rem;
+    background:white;
+}
+
+.svg-container *
+{
+    max-width: 20%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: solid 1px transparent;
+    cursor: pointer;
+}
+
+.svg-container *:hover
+{
+    border: solid 1px var(--header-bg);
+}
+
+.svg-container .active
+{
+    border: solid 1px var(--blue-1);
+}
+
+.svg-editor
+{
+    width: 300px;
+}
+
+.files-only
+{
+    display: none;
+}
