@@ -151,29 +151,62 @@ function clearSVG()
     })
 }
 
+/*
+ * Add a new SVG div to the container :
+ * the props parameter need 3 key :
+ *  - id    : the id attribute of the new svg
+ *  - text  : svg code to create
+ *  - fileName : an explicit name, representing the future file name
+ * 
+ * if filename is not defined, it will take the value of id
+ *
+*/
+async function addSVGDiv(props)
+{
+    if (!props.fileName) props.fileName = props.id;
+    let parser = new DOMParser;
+    let result      = props.text.replace(/<!--[^>]*>/gi, "")
+    let newSVG      = parser.parseFromString(result, "image/svg+xml");
+    let selector = `#${props.id}`;
+    newSVG.rootElement.setAttribute("id", props.id)
+    newSVG.rootElement.setAttribute("fileName", props.fileName)
+    $("#svgContainer").append(newSVG.documentElement)
+    await waitForElement(selector);
+    $(selector).on('click', toggleSelection)
+}
+
 async function readFile(fileObject)
 {
     let fileName = fileObject.name;
     let id = `ELEM-${fileName.substr(0, fileName.indexOf('.'))}`;
     let selector = `#${id}`;
     let reader = new FileReader;
-    let parser = new DOMParser;
     reader.addEventListener('load', function(){
-        let result      = reader.result.replace(/<!--[^>]*>/gi, "")
-        let newSVG      = parser.parseFromString(result, "image/svg+xml");
-        newSVG.rootElement.setAttribute("id", id)
-        newSVG.rootElement.setAttribute("fileName", fileName)
-        $("#svgContainer").append(newSVG.documentElement)
-        return;
+        addSVGDiv({
+            text: reader.result,
+            id,
+            fileName
+        })
     })
     reader.readAsText(fileObject, 'UTF-8');
-    await waitForElement(selector);
     return;
+}
+
+let customs = 0;
+async function importByText()
+{
+    let code = prompt("Entrez le code SVG :", "");
+    let id = `ELEM-CUSTOM-${customs++}`;
+    addSVGDiv({
+        text: code,
+        id: id
+    })
+    clearSVG()
+    $(".files-only").show()
 }
 
 function readAllFiles()
 {
-    $("#svgContainer").html("")
     let filesList = $("#fileInput")[0].files;
     let promises = [];
     for (let i=0; i<filesList.length; i++)
@@ -183,12 +216,12 @@ function readAllFiles()
     Promise.all(promises).then(()=>
     {
         clearSVG()
-        $("svg").on('click', toggleSelection)
         $(".files-only").show()
     })
 }
 
-$("#fileInputButton").on('click', ()=>{ $("#fileInput").trigger('click'); })
 $("#fileInput").on('change', readAllFiles);
+$("#fileInputButton").on('click', ()=>{ $("#fileInput").trigger('click'); })
+$("#textInputButton").on('click', importByText);
 $(".secondaryInputs").on('change', updateMainInput);
 $(".mainInput").on('change', updateSelectedItems);
